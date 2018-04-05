@@ -98,14 +98,15 @@ nav {
 nav h1 {
     margin: 0 auto;
     padding: 1em;
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
 }
 
 nav h1 a {
   color: #fff;
-  font-size: 20px;
+  font-size: 2em;
   font-weight: 200;
-  letter-spacing: 10px;
-  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* text-transform: uppercase; */
   font-family: 'Bree Serif', serif;
 
 }
@@ -159,12 +160,12 @@ nav h1 a {
 
 .filter-options {
     /* width: 100%; */
-    background-color: #3397DB;
-    align-items: center;
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);    align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding-bottom: 10px;
+    /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2vw)); */
 }
 
 .filter-options h2 {
@@ -175,6 +176,7 @@ nav h1 a {
     text-align: center;
     padding: 20px;
     margin: 0;
+    letter-spacing: 3px;
   }
 
 .filter-options select {
@@ -182,7 +184,7 @@ nav h1 a {
     border: 1px solid #fff;
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
-    height: 35px;
+    height: 48px;
     letter-spacing: 0;
     margin: 10px;
     padding: 0 10px;
@@ -250,16 +252,30 @@ nav h1 a {
 }
 
 #restaurants-list li a {
-    background-color: orange;
-    border-bottom: 3px solid #eee;
-    color: #fff;
-    display: inline-block;
-    font-size: 16px;
-    margin: 15px 0 0;
-    padding: 8px 30px 10px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
+  background-color: #0f6bbb;
+  color: #fff;
+  display: inline-block;
+  margin: 15px 0 0;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: .56px;
+  line-height: 36px;
+  font-family: "Roboto",sans-serif;
+  position: relative;
+}
+
+#restaurants-list li a::before{
+  background: linear-gradient(to right, #0389ff, #0dd3ff);
+    bottom: -2px;
+    content: '';
+    left: 0;
+    height: 2px;
+    position: absolute;
+    right: 0;
 }
 
 /* ====================== Restaurant Details ====================== */
