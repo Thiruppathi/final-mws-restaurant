@@ -24,5 +24,11 @@ In a terminal, check the version of Python you have: `python -V`. If you have Py
 
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write. 
 
+#Light House Scores
+I've generated [Light House Report](https://github.com/Thiruppathi/mws-restaurant-stage-1/light-house-scores/Before-Report-Expanded.pdf)
+before starting the project; so that I can get a fair idea on how much I've improved the application.
+
+
+
 
 
