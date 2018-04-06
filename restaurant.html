@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=EDGE">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto+Slab|Roboto:300,400" rel="stylesheet">
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=EDGE">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto+Slab|Roboto:300,400" rel="stylesheet">
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <link rel="stylesheet" href="css/styles.css">
   <title>Restaurant Info</title>
 </head>
 
@@ -21,11 +21,13 @@
       </h1>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb">
-      <li>
-        <a href="/">Home</a>
-      </li>
-    </ul>
+    <div>
+      <ul id="breadcrumb">
+        <li>
+          <a href="/">Home</a>
+        </li>
+      </ul>
+    </div>
     <!-- End breadcrumb -->
     <!-- End nav -->
   </header>
@@ -41,11 +43,18 @@
     <!-- Beginning restaurant -->
     <section id="restaurant-container">
       <h1 id="restaurant-name"></h1>
-      <img id="restaurant-img">
-      <p id="restaurant-cuisine"></p>
-      <p id="restaurant-address"></p>
-      <table id="restaurant-hours"></table>
+
+      <div class="restaurant-details">
+        <img id="restaurant-img">
+        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-address"></p>
+      </div>
+      <div class="restaurant-details">
+        <p>Opening Hours</p>
+        <table id="restaurant-hours"></table>
+      </div>
     </section>
+
     <!-- end restaurant -->
     <!-- Beginning reviews -->
     <section id="reviews-container">
