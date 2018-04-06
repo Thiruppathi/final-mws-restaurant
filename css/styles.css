@@ -418,3 +418,7 @@ nav h1 a {
   font-family: 'Roboto Slab', serif;
   /* font-size: 16px; */
 }
+
+.rating-stars {
+  color: #ff9800;
+}
