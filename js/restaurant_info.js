@@ -163,3 +163,13 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+    // self executing function here
+    (function () {
+      // your page initialization code here
+      // the DOM will be available here
+      setTimeout(() => {
+        let restaurantName =         document.querySelector('#restaurant-name').innerHTML;
+        document.querySelector('#map iframe').title = `Google Map Location for Restaurant ${restaurantName} `;
+      }, 1000);
+    })();

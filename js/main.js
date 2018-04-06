@@ -177,3 +177,12 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
+
+    // self executing function here
+    (function () {
+      // your page initialization code here
+      // the DOM will be available here
+      setTimeout(() => {
+        document.querySelector('#map iframe').title = "Google Map Locations for Restaurants";
+      }, 1000);
+    })();
