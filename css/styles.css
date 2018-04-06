@@ -178,7 +178,9 @@ nav h1 a {
     margin: 0;
     letter-spacing: 3px;
   }
-
+.filter-options label {
+  color: #fff;
+}
 .filter-options select {
     background-color: white;
     border: 1px solid #fff;
