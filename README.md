@@ -13,16 +13,21 @@ You have been provided the code for a restaurant reviews website. The code has a
 ### What do I do from here?
 
 ## Light House Scores
-I've generated [Light House Report](https://github.com/Thiruppathi/mws-restaurant-stage-1/light-house-scores/Before-Report-Expanded.pdf)
+I've generated [Light House Report](https://github.com/Thiruppathi/mws-restaurant-stage-1/blob/master/light-house-scores/Before-Report-Expanded.pdf)
 before starting the project; so that I can get a fair idea on how much I've improved the application.
 
 
 ## TODO
-[] Service Worker 
-[] CSS Lint
-[] JS Lint
-[] HTML Lint
-[] Performance Image Optimsation
-[] Review Text Formatting
+❌  Service Worker 
+
+❌  CSS Lint
+
+❌  JS Lint
+
+❌  HTML Lint
+
+❌  Performance Image Optimsation
+
+❌  Review Text Formatting
 
 
