@@ -17,6 +17,12 @@ I've generated [Light House Report](https://github.com/Thiruppathi/mws-restauran
 before starting the project; so that I can get a fair idea on how much I've improved the application.
 
 
-
+## TODO
+[] Service Worker 
+[] CSS Lint
+[] JS Lint
+[] HTML Lint
+[] Performance Image Optimsation
+[] Review Text Formatting
 
 
