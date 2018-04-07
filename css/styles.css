@@ -6,6 +6,7 @@ td,
 th,
 p,
 ul,
+ol,
 li {
     font: 16px/1.5 "Roboto Slab", serif;
     color: #333;
@@ -111,6 +112,7 @@ nav h1 a {
     list-style: none;
     background-color: #fff;
     margin: 0;
+    text-align: left;
 }
 
 /* Display list items side by side */
