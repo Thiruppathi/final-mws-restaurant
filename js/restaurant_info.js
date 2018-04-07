@@ -175,14 +175,13 @@ getParameterByName = (name, url) => {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
 
-// self executing function here
+// self executing function here to set a11y title for Google Map's iFrame
 (function() {
-  // your page initialization code here
-  // the DOM will be available here
   setTimeout(() => {
     let restaurantName = document.querySelector('#restaurant-name').innerHTML;
-    document.querySelector(
-      '#map iframe'
-    ).title = `Google Map Location for Restaurant ${restaurantName} `;
+    let googleMapFrame = document.querySelector('#map iframe');
+    if (googleMapFrame) {
+      googleMapFrame.title = `Google Map Location for Restaurant ${restaurantName} `;
+    }
   }, 1000);
 })();

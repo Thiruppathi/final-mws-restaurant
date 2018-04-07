@@ -188,7 +188,9 @@ addMarkersToMap = (restaurants = self.restaurants) => {
 // self executing function here to set a11y title for Google Map's iFrame
 (function() {
   setTimeout(() => {
-    document.querySelector('#map iframe').title =
-      'Google Map Locations for Restaurants';
+    let googleMapFrame = document.querySelector("#map iframe");
+    if (googleMapFrame) {
+      googleMapFrame.title = `Google Map Location for Restaurants`;
+    }
   }, 1000);
 })();
