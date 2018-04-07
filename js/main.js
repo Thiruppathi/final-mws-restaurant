@@ -147,7 +147,7 @@ createRestaurantHTML = restaurant => {
   let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.jpg')[0];
   const markUp = `<source media='(min-width: 450px)' srcset='${imgName}-medium.jpg'>
                   <source media='(min-width: 365px)' srcset='${imgName}-small.jpg'>
-                  <img src='${imgName}-small.jpg' alt='${restaurant.name}' class='restaurant-img' />`;
+                  <img src='${imgName}-small.jpg' alt='${restaurant.alt}' class='restaurant-img' />`;
   picture.innerHTML = markUp;
   li.append(picture);
 
