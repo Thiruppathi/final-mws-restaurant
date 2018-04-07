@@ -241,7 +241,7 @@ nav h1 a {
     max-width: 100%;
 }
 
-#restaurants-list li h1 {
+#restaurants-list li h3 {
     color: #0f6bbb;
     font: 16px/1.3 "Roboto Slab", serif;
     margin: 20px 0 10px;
