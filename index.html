@@ -12,15 +12,15 @@
 </head>
 
 <body>
-  <header>
-    <nav>
-      <h1>
+  <header role="banner">
+      <nav role="navigation">
+          <h1>
         <a href="/">Restaurant Reviews</a>
       </h1>
     </nav>
   </header>
 
-  <main id="maincontent">
+  <main id="maincontent" role="main">
     <section id="map-container">
       <div id="map"></div>
     </section>
@@ -29,13 +29,13 @@
         <h2>Filter Results</h2>
         <div class="selectWrapper">
           <label for="neighborhoods-select">Neighbourhoods</label>
-          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+          <select id="neighborhoods-select" name="neighborhoods-select" onchange="updateRestaurants()">
             <option value="all">All Neighborhoods</option>
           </select>
         </div>
         <div class="selectWrapper">
           <label for="cuisines-select">Cuisines</label>
-          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+          <select id="cuisines-select" name="cuisines-select" onchange="updateRestaurants()">
             <option value="all">All Cuisines</option>
           </select>
         </div>
@@ -43,7 +43,7 @@
       <ul id="restaurants-list"></ul>
     </section>
   </main>
-  <footer id="footer">
+  <footer id="footer" role="contentinfo">
     Copyright (c) 2018
     <a href="/">
       <strong>Restaurant Reviews</strong>
