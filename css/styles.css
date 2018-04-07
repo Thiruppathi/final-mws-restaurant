@@ -171,6 +171,13 @@ nav h1 a {
     letter-spacing: 3px;
 }
 
+.filter-options .selectWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
 .filter-options label {
     color: #fff;
 }
@@ -190,6 +197,7 @@ nav h1 a {
     outline: #ffffff auto 5px;
     outline-offset: 2px;
 }
+
 /* ====================== Restaurant Listing ====================== */
 
 #restaurants-list {
