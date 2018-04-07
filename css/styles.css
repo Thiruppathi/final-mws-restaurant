@@ -29,6 +29,13 @@ a:focus {
     text-decoration: none;
 }
 
+nav h1 a:hover,
+nav h1 a:focus {
+    color: #fff;
+    text-decoration: none;
+    outline: #fff auto 5px;
+}
+
 a img {
     border: none 0px #fff;
 }
@@ -179,6 +186,10 @@ nav h1 a {
     width: 200px;
 }
 
+.filter-options select:focus {
+    outline: #ffffff auto 5px;
+    outline-offset: 2px;
+}
 /* ====================== Restaurant Listing ====================== */
 
 #restaurants-list {
