@@ -1,0 +1,56 @@
+
+/* ====================== Navigation ====================== */
+
+nav {
+    width: 100%;
+    background-color: #252831;
+    text-align: center;
+}
+
+nav h1 {
+    margin: 0 auto;
+    padding: 1em;
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
+}
+
+nav h1 a {
+    color: #fff;
+    letter-spacing: 2px;
+    font: 2em "Bree Serif", serif;
+}
+
+#breadcrumb {
+    padding: 10px 40px 16px;
+    list-style: none;
+    background-color: #fff;
+    margin: 0;
+    text-align: left;
+}
+
+/* Display list items side by side */
+
+#breadcrumb li {
+    display: inline;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+
+#breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+
+#breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+
+#breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}

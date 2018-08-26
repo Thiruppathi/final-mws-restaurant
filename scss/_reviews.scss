@@ -1,0 +1,56 @@
+
+#reviews-container h2,
+#restaurant-container h1 {
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 10px;
+    padding: 2px 0;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 48px;
+    width: 100%;
+}
+
+#reviews-list {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+    #reviews-list li {
+        width: calc((80% - 15px) / 2);
+    }
+}
+
+#reviews-list li {
+    background-color: #fff;
+    border: 2px solid #f3f3f3;
+    list-style-type: none;
+    margin: 10px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+}
+
+#reviews-list li p {
+    margin: 0 0 10px;
+}
+
+#restaurant-hours td {
+    color: #666;
+}
+
+.reviewer-name {
+    color: #0f6bbb;
+    font: 1.5em "Roboto Slab", serif;
+}
+
+.rating-stars {
+    color: #0f6bbb;
+}

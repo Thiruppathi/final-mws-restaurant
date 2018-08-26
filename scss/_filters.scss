@@ -1,0 +1,49 @@
+
+/* ====================== Restaurant Filtering ====================== */
+
+.filter-options {
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.filter-options h2 {
+    color: white;
+    font-weight: normal;
+    line-height: 1;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+.filter-options .selectWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.filter-options label {
+    color: #fff;
+}
+
+.filter-options select {
+    background-color: #fff;
+    border: 1px solid #fff;
+    font: 16px "Roboto Slab", serif;
+    height: 48px;
+    letter-spacing: 0;
+    margin: 10px;
+    padding: 0 10px;
+    width: 200px;
+}
+
+.filter-options select:focus {
+    outline: #ffffff auto 5px;
+    outline-offset: 2px;
+}

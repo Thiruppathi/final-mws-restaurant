@@ -1,0 +1,77 @@
+
+/* ====================== Restaurant Details ====================== */
+
+#restaurant-container {
+    border-top: 1px solid #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#restaurant-name {
+    color: #0f6bbb;
+    font-family: 16px/1.1 "Roboto Slab", serif;
+    text-transform: uppercase;
+}
+
+#restaurant-img {
+    max-width: 100%;
+}
+
+#restaurant-address {
+    font-size: 16px;
+    margin: 10px 0px;
+    text-align: center;
+}
+
+#restaurant-cuisine {
+    background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 10px;
+    margin: 0 0 20px;
+    padding: 2px 0;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 48px;
+}
+
+.restaurant-details {
+    padding: 0 10px;
+    width: 100%;
+}
+
+#restaurant-hours {
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .restaurant-details {
+        width: calc((90% - 15px) / 2);
+    }
+}
+
+#restaurant-hours th,
+#restaurant-hours td {
+    padding: 0.5em;
+}
+
+#restaurant-hours th {
+    color: #fff;
+    font-weight: 300;
+    background-color: #78909C;
+}
+
+#restaurant-hours tr:nth-child(odd) td {
+    background-color: #fff;
+}
+
+#restaurant-hours tr:nth-child(even) td {
+    background-color: #eceff1;
+}
+
+#restaurant-hours td.winner {
+    font-weight: bold;
+}
