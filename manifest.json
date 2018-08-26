@@ -1,0 +1,25 @@
+{
+  "name": "Restaurant Reviews",
+  "short_name": "Rest-Reviews",
+  "scope": "/",
+  "theme_color": "#0f6bbb",
+  "icons": [{
+      "src": "images/img/icon.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "images/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/img/icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#0f6bbb",
+  "display": "standalone",
+  "start_url": "/"
+}
