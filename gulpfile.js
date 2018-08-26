@@ -29,12 +29,12 @@ gulp.task('scripts:main', () => {
 			})
 		)
 		.bundle()
-		.pipe(source('main_bundle.js'))
+		.pipe(source('main.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('./bundle_js'));
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('scripts:restaurant', () => {
@@ -50,13 +50,13 @@ gulp.task('scripts:restaurant', () => {
 			})
 		)
 		.bundle()
-		.pipe(source('restaurant_bundle.js'))
+		.pipe(source('restaurant.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(sourcemaps.write('maps'))
 		.pipe(gulp.dest('dist/js'))
-		.pipe(gulp.dest('./bundle_js'));
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('eslint', () =>
@@ -81,7 +81,7 @@ gulp.task('serve', ['styles'], () => {
 
 	gulp.watch('./sass/**/*.scss', ['styles']);
 	gulp.watch('./**/**.html').on('change', browserSync.reload);
-	gulp.watch('./bundle_js/**/*.js').on('change', browserSync.reload);
+	gulp.watch('./dist/**/*.js').on('change', browserSync.reload);
 });
 
 gulp.task('copy-files', () => {

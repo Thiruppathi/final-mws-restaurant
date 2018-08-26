@@ -7,79 +7,79 @@
 */
 
 module.exports = function(grunt) {
-  grunt.initConfig({
-    responsive_images: {
-      dev: {
-        options: {
-          engine: "im",
-          sizes: [
-            {
-              name: "small",
-              width: 320,
-              height: 240,
-              quality: 40
-            },
-            {
-              name: "medium",
-              width: 800,
-              quality: 80
-            }
-          ]
-        },
+	grunt.initConfig({
+		responsive_images: {
+			dev: {
+				options: {
+					engine: 'im',
+					sizes: [
+						{
+							name: 'small',
+							width: 320,
+							height: 240,
+							quality: 40,
+						},
+						{
+							name: 'medium',
+							width: 800,
+							quality: 80,
+						},
+					],
+				},
 
-        /*
+				/*
         You don't need to change this part if you don't change
         the directory structure.
         */
-        files: [
-          {
-            expand: true,
-            src: ["*.{gif,jpg,png}"],
-            cwd: "img/",
-            dest: "images/"
-          }
-        ]
-      }
-    },
+				files: [
+					{
+						expand: true,
+						src: ['*.{gif,jpg,png,ico}'],
+						cwd: 'img/',
+						dest: 'images/',
+					},
+				],
+			},
+		},
 
-    /* Clear out the images directory if it exists */
-    clean: {
-      dev: {
-        src: ["images"]
-      }
-    },
+		/* Clear out the images directory if it exists */
+		clean: {
+			dev: {
+				src: ['images'],
+			},
+		},
 
-    /* Generate the images directory if it is missing */
-    mkdir: {
-      dev: {
-        options: {
-          create: ["images"]
-        }
-      }
-    },
+		/* Generate the images directory if it is missing */
+		mkdir: {
+			dev: {
+				options: {
+					create: ['images'],
+				},
+			},
+		},
 
-    /* Copy the "fixed" images that don't go through processing into the img/directory */
-    copy: {
-      dev: {
-        files: [
-          {
-            expand: true,
-            src: "img/*.{gif,jpg,png}",
-            dest: "images/"
-          }
-        ]
-      }
-    }
-  });
+		/* Copy the "fixed" images that don't go through processing into the img/directory */
+		copy: {
+			dev: {
+				files: [
+					{
+						expand: true,
+						src: 'img/*.{gif,jpg,png,ico}',
+						dest: 'images/',
+					},
+				],
+			},
+		},
+	});
 
-  grunt.loadNpmTasks("grunt-responsive-images");
-  grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-mkdir");
-  grunt.registerTask("default", [
-    "clean",
-    "mkdir",
-    "copy",
-    "responsive_images"
-  ]);
+	grunt.loadNpmTasks('grunt-responsive-images');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-mkdir');
+	grunt.registerTask('default', [
+		'clean',
+		'mkdir',
+		'copy',
+		'responsive_images',
+	]);
 };
