@@ -10,21 +10,24 @@ let markers = [];
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
+	initListeners();
 	fetchNeighborhoods();
 	fetchCuisines();
 });
 
-document
-	.getElementById('cuisines-select')
-	.addEventListener('change', (event) => {
-		updateRestaurants();
-	});
+let initListeners = () => {
+	document
+		.getElementById('cuisines-select')
+		.addEventListener('change', (event) => {
+			updateRestaurants();
+		});
 
-document
-	.getElementById('neighborhoods-select')
-	.addEventListener('change', (event) => {
-		updateRestaurants();
-	});
+	document
+		.getElementById('neighborhoods-select')
+		.addEventListener('change', (event) => {
+			updateRestaurants();
+		});
+};
 
 /**
  * Fetch all neighborhoods and set their HTML.

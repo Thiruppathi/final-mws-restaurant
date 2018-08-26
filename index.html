@@ -5,11 +5,9 @@
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto+Slab|Roboto:300,400" rel="stylesheet">
-  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" href="css/styles.css" as="style" onload="this.rel='stylesheet'">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="theme-color" content="#0f6bbb" />
   <link rel="manifest" href="manifest.json" />
   <title>Restaurant Reviews</title>
@@ -53,8 +51,19 @@
       <strong>Restaurant Reviews</strong>
     </a> All Rights Reserved.
   </footer>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcrXCcFEVQUobhCEY_XcDuXvzo5sUk4xg&libraries=places&callback=initMap"></script>
-  <script src="dist/main.js"></script>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+      if (!navigator.serviceWorker) return;
+      navigator.serviceWorker
+        .register('sw.js')
+        .then((registration) => console.log('️✅ Yay! Service Worker Registered!'))
+        .catch((e) => console.log('❌ Registration failed :(', e));
+    });
+
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQaK7Yo_7GTTN11MRiZP8xFEreiKgMd94&libraries=places&callback=initMap"></script>
+  <script async defer src="dist/main.js"></script>
 </body>
 
 </html>

@@ -22,7 +22,7 @@ gulp.task('styles', () =>
 );
 
 gulp.task('scripts:main', () => {
-	browserify(['js/main.js', 'js/dbhelper.js', 'js/app.js', './sw.js'])
+	browserify(['js/main.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
 				presets: ['env'],
@@ -38,12 +38,7 @@ gulp.task('scripts:main', () => {
 });
 
 gulp.task('scripts:restaurant', () => {
-	browserify([
-		'js/restaurant_info.js',
-		'js/dbhelper.js',
-		'js/app.js',
-		'./sw.js',
-	])
+	browserify(['js/restaurant_info.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
 				presets: ['env'],
@@ -55,7 +50,6 @@ gulp.task('scripts:restaurant', () => {
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
 		.pipe(sourcemaps.write('maps'))
-		.pipe(gulp.dest('dist/js'))
 		.pipe(gulp.dest('./dist'));
 });
 

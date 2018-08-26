@@ -5,9 +5,7 @@
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Roboto+Slab|Roboto:300,400" rel="stylesheet">
-  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link href="css/styles.css" rel="preload" as="style" onload="this.rel='stylesheet'">
   <link rel="shortcut icon" href="images/img/favicon.ico" type="image/x-icon">
   <link rel="icon" href="images/img/favicon.ico" type="image/x-icon">
   <meta name="theme-color" content="#0f6bbb" />
@@ -78,10 +76,20 @@
     </a> All Rights Reserved.
   </footer>
   <!-- End footer -->
+  <script>
 
+    document.addEventListener('DOMContentLoaded', (event) => {
+      if (!navigator.serviceWorker) return;
+      navigator.serviceWorker
+        .register('sw.js')
+        .then((registration) => console.log('️✅ Yay! Service Worker Registered!'))
+        .catch((e) => console.log('❌ Registration failed :(', e));
+    });
+
+  </script>
   <!-- Google Maps -->
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY9vGkGGbLKengmChVC9KJlTjAomLaTho&libraries=places&callback=initMap"></script>
-  <script src="dist/restaurant.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQaK7Yo_7GTTN11MRiZP8xFEreiKgMd94&libraries=places&callback=initMap"></script>
+  <script  async defer src="dist/restaurant.js"></script>
   <!-- End scripts -->
 
 </body>
