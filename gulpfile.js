@@ -14,7 +14,7 @@ gulp.task('styles', () =>
 		.src('./scss/**/*.scss')
 		.pipe(
 			sass({
-				outputStyle: 'compressed',
+				outputStyle: 'compressed'
 			}).on('error', sass.logError)
 		)
 		.pipe(gulp.dest('./css'))
@@ -25,7 +25,7 @@ gulp.task('scripts:main', () => {
 	browserify(['js/main.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
-				presets: ['env'],
+				presets: ['env']
 			})
 		)
 		.bundle()
@@ -41,7 +41,7 @@ gulp.task('scripts:restaurant', () => {
 	browserify(['js/restaurant_info.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
-				presets: ['env'],
+				presets: ['env']
 			})
 		)
 		.bundle()
@@ -70,7 +70,7 @@ gulp.task('watch', () => {
 gulp.task('serve', ['styles'], () => {
 	browserSync.init({
 		server: './',
-		browser: 'google chrome',
+		browser: 'google chrome'
 	});
 
 	gulp.watch('./sass/**/*.scss', ['styles']);
@@ -93,13 +93,14 @@ gulp.task('dist', [
 	'grunt-image',
 	'styles',
 	'scripts:main',
-	'scripts:restaurant',
+	'scripts:restaurant'
 ]);
 
 gulp.task('default', [
 	'grunt-image',
+	'styles',
 	'scripts:main',
 	'scripts:restaurant',
 	'watch',
-	'serve',
+	'serve'
 ]);

@@ -14,7 +14,7 @@ window.initMap = () => {
 			map = new google.maps.Map(document.getElementById('map'), {
 				zoom: 16,
 				center: data.latlng,
-				scrollwheel: false,
+				scrollwheel: false
 			});
 			fillBreadcrumb();
 			DBHelper.mapMarkerForRestaurant(restaurant, map);
@@ -25,7 +25,7 @@ window.initMap = () => {
 /**
  * Get current restaurant from page URL.
  */
-let fetchRestaurantFromURL = (callback) => {
+let fetchRestaurantFromURL = callback => {
 	if (restaurant) {
 		// restaurant already fetched!
 		callback(null, restaurant);
@@ -113,7 +113,7 @@ let fillReviewsHTML = (reviews = restaurant.reviews) => {
 		return;
 	}
 	const ul = document.getElementById('reviews-list');
-	reviews.forEach((review) => {
+	reviews.forEach(review => {
 		ul.appendChild(createReviewHTML(review));
 	});
 	container.appendChild(ul);
@@ -122,7 +122,7 @@ let fillReviewsHTML = (reviews = restaurant.reviews) => {
 /**
  * Create review HTML and add it to the webpage.
  */
-let createReviewHTML = (review) => {
+let createReviewHTML = review => {
 	const li = document.createElement('li');
 	const name = document.createElement('p');
 	name.innerHTML = review.name;

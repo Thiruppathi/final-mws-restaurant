@@ -9,7 +9,7 @@ let markers = [];
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', event => {
 	initListeners();
 	fetchNeighborhoods();
 	fetchCuisines();
@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 let initListeners = () => {
 	document
 		.getElementById('cuisines-select')
-		.addEventListener('change', (event) => {
+		.addEventListener('change', event => {
 			updateRestaurants();
 		});
 
 	document
 		.getElementById('neighborhoods-select')
-		.addEventListener('change', (event) => {
+		.addEventListener('change', event => {
 			updateRestaurants();
 		});
 };
@@ -45,6 +45,8 @@ let fetchNeighborhoods = () => {
 
 /**
  * Set neighborhoods HTML.
+ * @param {object} data - neighborhoods
+ * @return {void}
  */
 let fillNeighborhoodsHTML = (data = neighborhoods) => {
 	const select = document.getElementById('neighborhoods-select');
@@ -76,6 +78,8 @@ let fetchCuisines = () => {
 
 /**
  * Set cuisines HTML.
+ * @param {object} data - cuisines
+ * @return {void}
  */
 let fillCuisinesHTML = (data = cuisines) => {
 	const select = document.getElementById('cuisines-select');
@@ -97,12 +101,12 @@ let fillCuisinesHTML = (data = cuisines) => {
 window.initMap = () => {
 	let loc = {
 		lat: 40.722216,
-		lng: -73.987501,
+		lng: -73.987501
 	};
 	map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 12,
 		center: loc,
-		scrollwheel: false,
+		scrollwheel: false
 	});
 	updateRestaurants();
 };
@@ -137,25 +141,29 @@ let updateRestaurants = () => {
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
+ * @param {object} data
+ * @return {void}
  */
-let resetRestaurants = (data) => {
+let resetRestaurants = data => {
 	// Remove all restaurants
 	restaurants = [];
 	const ul = document.getElementById('restaurants-list');
 	ul.innerHTML = '';
 
 	// Remove all map markers
-	markers.forEach((m) => m.setMap(null));
+	markers.forEach(m => m.setMap(null));
 	markers = [];
 	restaurants = data;
 };
 
 /**
  * Create all restaurants HTML and add them to the webpage.
+ * @param {object} data - restaurants
+ * @return {void}
  */
 let fillRestaurantsHTML = (data = restaurants) => {
 	const ul = document.getElementById('restaurants-list');
-	data.forEach((restaurant) => {
+	data.forEach(restaurant => {
 		ul.append(createRestaurantHTML(restaurant));
 	});
 	addMarkersToMap();
@@ -163,15 +171,17 @@ let fillRestaurantsHTML = (data = restaurants) => {
 
 /**
  * Create restaurant HTML.
+ * @param {object} restaurant
+ * @return {void}
  */
-let createRestaurantHTML = (restaurant) => {
+let createRestaurantHTML = restaurant => {
 	const li = document.createElement('li');
 
 	const picture = document.createElement('picture');
 	let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.jpg')[0];
 	const markUp = `<source media='(min-width: 450px)' srcset='${imgName}-medium.jpg'>
-                  <source media='(min-width: 365px)' srcset='${imgName}-small.jpg'>
-                  <img src='${imgName}-small.jpg' alt='${
+			<source media='(min-width: 365px)' srcset='${imgName}-small.jpg'>
+			<img src='${imgName}-small.jpg' alt='${
 		restaurant.alt
 	}' class='restaurant-img' />`;
 	picture.innerHTML = markUp;
@@ -180,6 +190,18 @@ let createRestaurantHTML = (restaurant) => {
 	const name = document.createElement('h3');
 	name.innerHTML = restaurant.name;
 	li.append(name);
+
+	const favourite = document.createElement('button');
+	favourite.innerHTML = '❤';
+	favourite.classList.add('favBtn');
+	favourite.onclick = function() {
+		const isFavNow = !restaurant.is_favorite;
+		DBHelper.updateFavourite(restaurant.id, isFavNow);
+		restaurant.is_favorite = !restaurant.is_favorite;
+		toggleFavourite(favourite, restaurant.is_favorite);
+	};
+	toggleFavourite(favourite, restaurant.is_favorite);
+	li.append(favourite);
 
 	const neighborhood = document.createElement('p');
 	neighborhood.innerHTML = restaurant.neighborhood;
@@ -199,9 +221,29 @@ let createRestaurantHTML = (restaurant) => {
 
 /**
  * Add markers for current restaurants to the map.
+ * @param {Element} el
+ * @param {Boolean} fav
+ * @return {void}
+ */
+let toggleFavourite = (el, fav) => {
+	if (!fav) {
+		el.classList.remove('favorite');
+		el.classList.add('notFavorite');
+		el.setAttribute('aria-label', 'mark as favorite');
+	} else {
+		el.classList.remove('notFavorite');
+		el.classList.add('favorite');
+		el.setAttribute('aria-label', 'remove as favorite');
+	}
+};
+
+/**
+ * Add markers for current restaurants to the map.
+ * @param {object} data - restaurants
+ * @return {void}
  */
 let addMarkersToMap = (data = restaurants) => {
-	data.forEach((restaurant) => {
+	data.forEach(restaurant => {
 		// Add marker to the map
 		const marker = DBHelper.mapMarkerForRestaurant(restaurant, map);
 		google.maps.event.addListener(marker, 'click', () => {

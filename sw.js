@@ -1,10 +1,9 @@
-let staticCacheName = 'restaurants-static-v0';
+let staticCacheName = 'restaurants-static-v3';
 let urlsToCache = [
 	'./',
 	'index.html',
 	'restaurant.html',
 	'css/styles.css',
-	'data/restaurants.json',
 	'dist/main.js',
 	'dist/restaurant.js',
 	'images/img/favicon.ico',
@@ -30,29 +29,29 @@ let urlsToCache = [
 	'images/7-medium.jpg',
 	'images/8-medium.jpg',
 	'images/9-medium.jpg',
-	'images/10-medium.jpg',
+	'images/10-medium.jpg'
 ];
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
 	event.waitUntil(
 		caches
 			.open(staticCacheName)
-			.then((cache) => cache.addAll(urlsToCache))
+			.then(cache => cache.addAll(urlsToCache))
 			.then(self.skipWaiting())
 	);
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
 	event.waitUntil(
-		caches.keys().then((cacheNames) =>
+		caches.keys().then(cacheNames =>
 			Promise.all(
 				cacheNames
 					.filter(
-						(cacheName) =>
+						cacheName =>
 							cacheName.startsWith('restaurants-') &&
 							cacheName !== staticCacheName
 					)
-					.map((cacheName) => {
+					.map(cacheName => {
 						console.log(
 							`⚙️ ServiceWorker Deleting the cached files from ${cacheName} `
 						);
@@ -63,9 +62,9 @@ self.addEventListener('activate', (event) => {
 	);
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
 	event.respondWith(
-		caches.match(event.request).then((response) => {
+		caches.match(event.request).then(response => {
 			return response || fetch(event.request);
 		})
 	);

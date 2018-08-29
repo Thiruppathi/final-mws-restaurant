@@ -12,7 +12,8 @@
 		"class-methods-use-this": 0,
 		"no-param-reassign": 0,
 		"indent": [0, "tab"],
-		"no-tabs": 0
+		"no-tabs": 0,
+		"max-len": 120,
 	},
 
 	"globals": {

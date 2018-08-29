@@ -19,8 +19,8 @@ class DBHelper {
 	 * @return {object} Promise Object for IDB
 	 */
 	static openIDB() {
-		return idb.open('restaurants', 1, (upgradeDb) => {
-			upgradeDb.createObjectStore('restaurants', {keyPath: 'id'});
+		return idb.open('restaurants', 1, upgradeDb => {
+			upgradeDb.createObjectStore('restaurants', { keyPath: 'id' });
 		});
 	}
 
@@ -54,7 +54,32 @@ class DBHelper {
 			let tx = db.transaction('restaurants', 'readwrite');
 			let restaurantStore = tx.objectStore('restaurants');
 
-			data.forEach((restaurant) => restaurantStore.put(restaurant));
+			data.forEach(restaurant => restaurantStore.put(restaurant));
+		});
+	}
+
+	/**
+	 * Update Favourite
+	 * @param {Number} restaurantId
+	 * @param {Boolean} isFavourite
+	 * @return {void}
+	 */
+	static updateFavourite(restaurantId, isFavourite) {
+		const FAV_URL = `${
+			DBHelper.DATABASE_URL
+		}/${restaurantId}/?is_favorite=${isFavourite}`;
+
+		fetch(FAV_URL, {
+			method: 'PUT'
+		}).then(() => {
+			dbPromise.then(db => {
+				const tx = db.transaction('restaurants', 'readwrite');
+				const restaurantStore = tx.objectStore('restaurants');
+				restaurantStore.get(restaurantId).then(restaurant => {
+					restaurant.is_favorite = isFavourite;
+					restaurantStore.put(restaurant);
+				});
+			});
 		});
 	}
 
@@ -69,9 +94,9 @@ class DBHelper {
 				return callback(null, data);
 			}
 
-			fetch(DBHelper.DATABASE_URL, {credentials: 'same-origin'})
-				.then((response) => response.json())
-				.then((data) => {
+			fetch(DBHelper.DATABASE_URL, { credentials: 'same-origin' })
+				.then(response => response.json())
+				.then(data => {
 					dbPromise.then(function(db) {
 						if (!db) return db;
 						console.log('data fetched is: ', data);
@@ -79,11 +104,11 @@ class DBHelper {
 						let tx = db.transaction('restaurants', 'readwrite');
 						let restaurantStore = tx.objectStore('restaurants');
 						debugger;
-						data.forEach((restaurant) => restaurantStore.put(restaurant));
+						data.forEach(restaurant => restaurantStore.put(restaurant));
 					});
 					return callback(null, data);
 				})
-				.catch((err) => {
+				.catch(err => {
 					return callback(err, null);
 				});
 		});
@@ -100,7 +125,7 @@ class DBHelper {
 			if (error) {
 				callback(error, null);
 			} else {
-				const restaurant = restaurants.find((r) => r.id == id);
+				const restaurant = restaurants.find(r => r.id == id);
 				if (restaurant) {
 					// Got the restaurant
 					callback(null, restaurant);
@@ -125,7 +150,7 @@ class DBHelper {
 				callback(error, null);
 			} else {
 				// Filter restaurants to have only given cuisine type
-				const results = restaurants.filter((r) => r.cuisine_type == cuisine);
+				const results = restaurants.filter(r => r.cuisine_type == cuisine);
 				callback(null, results);
 			}
 		});
@@ -144,9 +169,7 @@ class DBHelper {
 				callback(error, null);
 			} else {
 				// Filter restaurants to have only given neighborhood
-				const results = restaurants.filter(
-					(r) => r.neighborhood == neighborhood
-				);
+				const results = restaurants.filter(r => r.neighborhood == neighborhood);
 				callback(null, results);
 			}
 		});
@@ -172,11 +195,11 @@ class DBHelper {
 				let results = restaurants;
 				if (cuisine != 'all') {
 					// filter by cuisine
-					results = results.filter((r) => r.cuisine_type == cuisine);
+					results = results.filter(r => r.cuisine_type == cuisine);
 				}
 				if (neighborhood != 'all') {
 					// filter by neighborhood
-					results = results.filter((r) => r.neighborhood == neighborhood);
+					results = results.filter(r => r.neighborhood == neighborhood);
 				}
 				callback(null, results);
 			}
@@ -259,7 +282,7 @@ class DBHelper {
 			title: restaurant.name,
 			url: DBHelper.urlForRestaurant(restaurant),
 			map: map,
-			animation: google.maps.Animation.DROP,
+			animation: google.maps.Animation.DROP
 		});
 		return marker;
 	}

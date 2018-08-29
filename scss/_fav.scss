@@ -1,0 +1,29 @@
+.favBtn {
+	align-self: flex-start;
+	margin-left: 3px;
+	font-size: 30px;
+	background: white;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+
+	&:hover {
+		box-shadow: 0px 1px 5px #777;
+	}
+}
+
+.favorite {
+	color: #e0245e;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.notFavorite {
+	color: #b8b8b8;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
