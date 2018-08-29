@@ -1,0 +1,81 @@
+#form-container {
+	border-top: 1px solid #fff;
+	padding: 30px 40px 80px 30px;
+	display: flex;
+	flex-flow: column wrap;
+	align-items: stretch;
+	font: 16px "Roboto", sans-serif;
+}
+
+#form-container h2 {
+	color: black;
+	font-size: 24pt;
+	font-weight: 300;
+	letter-spacing: -1px;
+	padding-bottom: 1pt;
+}
+
+form {
+	width: 86%;
+	max-width: 350px;
+	font: 16px "Roboto", sans-serif;
+
+}
+
+.rating-container select {
+	border: 2px solid darkgrey;
+	background: #f2f2f2;
+	color: black;
+	font-size: 1rem;
+	height: 35px;
+	letter-spacing: 0;
+	padding: 0 10px;
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+form input[type=text] {
+	border: 2px solid darkgrey;
+	background: #f2f2f2;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px;
+	font-size: 18px;
+}
+
+textarea {
+	width: 100%;
+	border: 2px solid darkgrey;
+	min-height: 150px;
+	box-sizing: border-box;
+	padding: 5px;
+	font-size: 18px;
+	background: #f2f2f2;
+	box-sizing: border-box;
+}
+
+form button {
+	background: linear-gradient(36deg, #0dd3ff, #0389ff, #1c79c0);
+	color: #fff;
+	display: inline-block;
+	margin: 15px 0 0;
+	padding: 8px 30px 10px;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: .56px;
+	line-height: 36px;
+	font: 16px "Roboto", sans-serif;
+	position: relative;
+	width: calc(100% - 60px);
+}
+
+form button::before {
+	background: linear-gradient(to right, #0389ff, #0dd3ff);
+	bottom: -2px;
+	content: '';
+	left: 0;
+	height: 2px;
+	position: absolute;
+	right: 0;
+}

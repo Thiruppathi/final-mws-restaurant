@@ -15,12 +15,31 @@ class DBHelper {
 	}
 
 	/**
+	 * Database URL.
+	 * Change this to restaurants.json file location on your server.
+	 */
+	static get REVIEW_URL() {
+		const port = 1337; // Change this to your server port
+		return `http://localhost:${port}/reviews`;
+	}
+
+	/**
 	 * Open Index Database (IDB)
 	 * @return {object} Promise Object for IDB
 	 */
 	static openIDB() {
-		return idb.open('restaurants', 1, upgradeDb => {
-			upgradeDb.createObjectStore('restaurants', { keyPath: 'id' });
+		return idb.open('db', 2, function(upgradeDb) {
+			switch (upgradeDb.oldVersion) {
+				case 0:
+					upgradeDb.createObjectStore('restaurants', {
+						keyPath: 'id'
+					});
+				case 1:
+					const reviewsStore = upgradeDb.createObjectStore('reviews', {
+						keyPath: 'id'
+					});
+					reviewsStore.createIndex('restaurant', 'restaurant_id');
+			}
 		});
 	}
 
@@ -252,6 +271,101 @@ class DBHelper {
 		});
 	}
 
+	static addReview(review) {
+		let offlineReview = {
+			name: 'addReview',
+			data: review,
+			object_type: 'review'
+		};
+		// Check if online
+		if (!navigator.onLine && offlineReview.name === 'addReview') {
+			DBHelper.sendDataWhenOnline(offlineReview);
+			return;
+		}
+		let pushReview = {
+			name: review.name,
+			rating: parseInt(review.rating),
+			comments: review.comments,
+			restaurant_id: parseInt(review.restaurant_id)
+		};
+		console.log('Sending review: ', pushReview);
+		const FETCH_REVIEW_OPTIONS = {
+			method: 'POST',
+			body: JSON.stringify(pushReview),
+			headers: new Headers({
+				'Content-Type': 'application/json'
+			})
+		};
+		fetch(DBHelper.REVIEW_URL, FETCH_REVIEW_OPTIONS)
+			.then(response => {
+				const contentType = response.headers.get('content-type');
+				if (contentType && contentType.indexOf('application/json') !== -1) {
+					return response.json();
+				} else {
+					return 'API call successfull';
+				}
+			})
+			.then(data => {
+				console.log(`Fetch successful!`);
+			})
+			.catch(error => console.log('error:', error));
+	}
+
+	static sendDataWhenOnline(offlineReview) {
+		console.log('Offline OBJ', offlineReview);
+		localStorage.setItem('data', JSON.stringify(offlineReview.data));
+		console.log(`Local Storage: ${offlineReview.object_type} stored`);
+		window.addEventListener('online', event => {
+			console.log('Browser: Online again!');
+			let data = JSON.parse(localStorage.getItem('data'));
+			console.log('updating and cleaning ui');
+			[...document.querySelectorAll('.reviews_offline')].forEach(el => {
+				el.classList.remove('reviews_offline');
+				el.querySelector('.offline_label').remove();
+			});
+			if (data !== null) {
+				console.log(data);
+				if (offlineReview.name === 'addReview') {
+					DBHelper.addReview(offlineReview.data);
+				}
+
+				console.log('LocalState: data sent to api');
+
+				localStorage.removeItem('data');
+				console.log(`Local Storage: ${offlineReview.object_type} removed`);
+			}
+		});
+	}
+
+	static fetchReviewsByRestId(id) {
+		return fetch(`${DBHelper.REVIEW_URL}/?restaurant_id=${id}`)
+			.then(response => response.json())
+			.then(reviews => {
+				dbPromise.then(db => {
+					if (!db) return;
+
+					let tx = db.transaction('reviews', 'readwrite');
+					const store = tx.objectStore('reviews');
+					if (Array.isArray(reviews)) {
+						reviews.forEach(function(review) {
+							store.put(review);
+						});
+					} else {
+						store.put(reviews);
+					}
+				});
+				console.log('reviews are: ', reviews);
+				return Promise.resolve(reviews);
+			})
+			.catch(error => {
+				return DBHelper.getStoredObjectById('reviews', 'restaurant', id).then(
+					storedReviews => {
+						console.log('looking for offline stored reviews', error);
+						return Promise.resolve(storedReviews);
+					}
+				);
+			});
+	}
 	/**
 	 * Restaurant page URL.
 	 * @param {Object} restaurant

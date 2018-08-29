@@ -3,6 +3,11 @@ import DBHelper from './dbhelper';
 let restaurant;
 let map;
 
+document.getElementById('addReviewBtn').addEventListener('click', event => {
+	console.log('Clicked');
+	addReview(event);
+});
+
 /**
  * Initialize Google map, called from HTML.
  */
@@ -17,7 +22,7 @@ window.initMap = () => {
 				scrollwheel: false
 			});
 			fillBreadcrumb();
-			DBHelper.mapMarkerForRestaurant(restaurant, map);
+			DBHelper.mapMarkerForRestaurant(data, map);
 		}
 	});
 };
@@ -31,10 +36,10 @@ let fetchRestaurantFromURL = callback => {
 		callback(null, restaurant);
 		return;
 	}
-	const id = getParameterByName('id');
-	if (!id) {
+	const id = parseInt(getParameterByName('id'));
+	if (!id || id === NaN) {
 		// no id found in URL
-		error = 'No restaurant id in URL';
+		let error = 'No restaurant id in URL';
 		callback(error, null);
 	} else {
 		DBHelper.fetchRestaurantById(id, (error, data) => {
@@ -59,10 +64,10 @@ let fillRestaurantHTML = (data = restaurant) => {
 	const address = document.getElementById('restaurant-address');
 	address.innerHTML = data.address;
 
-	let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.jpg')[0];
+	let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.webp')[0];
 	const image = document.getElementById('restaurant-img');
 	image.className = 'restaurant-img';
-	image.src = `${imgName}-medium.jpg`;
+	image.src = `${imgName}-medium.webp`;
 	image.alt = `${data.name}'s photo.`;
 
 	const cuisine = document.getElementById('restaurant-cuisine');
@@ -73,7 +78,9 @@ let fillRestaurantHTML = (data = restaurant) => {
 		fillRestaurantHoursHTML();
 	}
 	// fill reviews
-	fillReviewsHTML();
+	DBHelper.fetchReviewsByRestId(restaurant.id).then(reviews =>
+		fillReviewsHTML(reviews)
+	);
 };
 
 /**
@@ -130,7 +137,7 @@ let createReviewHTML = review => {
 	li.appendChild(name);
 
 	const date = document.createElement('p');
-	date.innerHTML = review.date;
+	date.innerHTML = new Date(review.createdAt).toLocaleString();
 	li.appendChild(date);
 
 	const rating = document.createElement('p');
@@ -149,6 +156,47 @@ let createReviewHTML = review => {
 	li.appendChild(comments);
 
 	return li;
+};
+
+// Form validation & submission
+let addReview = event => {
+	event.preventDefault();
+	// Getting the data from the form
+	const formData = getFormData();
+	DBHelper.addReview(formData);
+	addReviewHTML(formData);
+	document.getElementById('review-form').reset();
+};
+
+let getFormData = () => {
+	let restaurant_id = parseInt(getParameterByName('id'));
+	let name = document.getElementById('review-author').value;
+	let comments = document
+		.getElementById('review-comments')
+		.value.substring(0, 300);
+	let rating = parseInt(
+		document.querySelector('#rating_select option:checked').value
+	);
+	let createdAt = new Date();
+	return {
+		restaurant_id,
+		name,
+		createdAt,
+		rating,
+		comments
+	};
+};
+
+let addReviewHTML = review => {
+	if (document.getElementById('no-review')) {
+		document.getElementById('no-review').remove();
+	}
+	const container = document.getElementById('reviews-container');
+	const ul = document.getElementById('reviews-list');
+
+	//insert the new review on top
+	ul.insertBefore(createReviewHTML(review), ul.firstChild);
+	container.appendChild(ul);
 };
 
 /**
