@@ -17,14 +17,14 @@ module.exports = function(grunt) {
 							name: 'small',
 							width: 320,
 							height: 240,
-							quality: 40,
+							quality: 40
 						},
 						{
 							name: 'medium',
 							width: 800,
-							quality: 80,
-						},
-					],
+							quality: 80
+						}
+					]
 				},
 
 				/*
@@ -34,28 +34,28 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: ['*.{gif,jpg,png,ico}'],
+						src: ['*.{webp,gif,jpg,png,ico}'],
 						cwd: 'img/',
-						dest: 'images/',
-					},
-				],
-			},
+						dest: 'images/'
+					}
+				]
+			}
 		},
 
 		/* Clear out the images directory if it exists */
 		clean: {
 			dev: {
-				src: ['images'],
-			},
+				src: ['images']
+			}
 		},
 
 		/* Generate the images directory if it is missing */
 		mkdir: {
 			dev: {
 				options: {
-					create: ['images'],
-				},
-			},
+					create: ['images']
+				}
+			}
 		},
 
 		/* Copy the "fixed" images that don't go through processing into the img/directory */
@@ -64,12 +64,12 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: 'img/*.{gif,jpg,png,ico}',
-						dest: 'images/',
-					},
-				],
-			},
-		},
+						src: 'img/*.{webp,gif,jpg,png,ico}',
+						dest: 'images/'
+					}
+				]
+			}
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-responsive-images');
@@ -80,6 +80,6 @@ module.exports = function(grunt) {
 		'clean',
 		'mkdir',
 		'copy',
-		'responsive_images',
+		'responsive_images'
 	]);
 };
