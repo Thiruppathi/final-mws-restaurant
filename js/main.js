@@ -178,10 +178,10 @@ let createRestaurantHTML = restaurant => {
 	const li = document.createElement('li');
 
 	const picture = document.createElement('picture');
-	let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.jpg')[0];
-	const markUp = `<source media='(min-width: 450px)' srcset='${imgName}-medium.jpg'>
-			<source media='(min-width: 365px)' srcset='${imgName}-small.jpg'>
-			<img src='${imgName}-small.jpg' alt='${
+	let imgName = DBHelper.imageUrlForRestaurant(restaurant).split('.webp')[0];
+	const markUp = `<source media='(min-width: 450px)' srcset='${imgName}-medium.webp'>
+			<source media='(min-width: 365px)' srcset='${imgName}-small.webp'>
+			<img src='${imgName}-small.webp' alt='${
 		restaurant.alt
 	}' class='restaurant-img' />`;
 	picture.innerHTML = markUp;

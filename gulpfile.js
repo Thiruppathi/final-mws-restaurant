@@ -45,7 +45,7 @@ gulp.task('scripts:restaurant', () => {
 			})
 		)
 		.bundle()
-		.pipe(source('restaurant.js'))
+		.pipe(source('restaurant_info.js'))
 		.pipe(buffer())
 		.pipe(sourcemaps.init())
 		.pipe(uglify())
