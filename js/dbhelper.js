@@ -118,11 +118,8 @@ class DBHelper {
 				.then(data => {
 					dbPromise.then(function(db) {
 						if (!db) return db;
-						console.log('data fetched is: ', data);
-
 						let tx = db.transaction('restaurants', 'readwrite');
 						let restaurantStore = tx.objectStore('restaurants');
-						debugger;
 						data.forEach(restaurant => restaurantStore.put(restaurant));
 					});
 					return callback(null, data);
@@ -288,7 +285,6 @@ class DBHelper {
 			comments: review.comments,
 			restaurant_id: parseInt(review.restaurant_id)
 		};
-		console.log('Sending review: ', pushReview);
 		const FETCH_REVIEW_OPTIONS = {
 			method: 'POST',
 			body: JSON.stringify(pushReview),
@@ -312,27 +308,18 @@ class DBHelper {
 	}
 
 	static sendDataWhenOnline(offlineReview) {
-		console.log('Offline OBJ', offlineReview);
 		localStorage.setItem('data', JSON.stringify(offlineReview.data));
-		console.log(`Local Storage: ${offlineReview.object_type} stored`);
 		window.addEventListener('online', event => {
-			console.log('Browser: Online again!');
 			let data = JSON.parse(localStorage.getItem('data'));
-			console.log('updating and cleaning ui');
 			[...document.querySelectorAll('.reviews_offline')].forEach(el => {
 				el.classList.remove('reviews_offline');
 				el.querySelector('.offline_label').remove();
 			});
 			if (data !== null) {
-				console.log(data);
 				if (offlineReview.name === 'addReview') {
 					DBHelper.addReview(offlineReview.data);
 				}
-
-				console.log('LocalState: data sent to api');
-
 				localStorage.removeItem('data');
-				console.log(`Local Storage: ${offlineReview.object_type} removed`);
 			}
 		});
 	}

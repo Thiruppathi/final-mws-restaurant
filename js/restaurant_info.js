@@ -4,7 +4,6 @@ let restaurant;
 let map;
 
 document.getElementById('addReviewBtn').addEventListener('click', event => {
-	console.log('Clicked');
 	addReview(event);
 });
 
