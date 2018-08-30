@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <meta name="theme-color" content="#0f6bbb" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="/manifest.json" />
   <title>Restaurant Info</title>
 </head>
 
@@ -102,17 +102,7 @@
     </a> All Rights Reserved.
   </footer>
   <!-- End footer -->
-  <script>
-
-    document.addEventListener('DOMContentLoaded', (event) => {
-      if (!navigator.serviceWorker) return;
-      navigator.serviceWorker
-        .register('sw.js')
-        .then((registration) => console.log('️✅ Yay! Service Worker Registered!'))
-        .catch((e) => console.log('❌ Registration failed :(', e));
-    });
-
-  </script>
+  <script asyn defer src="register-sw.js"></script>
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQaK7Yo_7GTTN11MRiZP8xFEreiKgMd94&libraries=places&callback=initMap"></script>
   <script  async defer src="dist/restaurant_info.js"></script>

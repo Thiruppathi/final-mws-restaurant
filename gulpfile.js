@@ -22,7 +22,7 @@ gulp.task('styles', () =>
 );
 
 gulp.task('scripts:main', () => {
-	browserify(['js/main.js', 'js/dbhelper.js'])
+	browserify(['./sw.js', 'js/main.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
 				presets: ['env']
@@ -38,7 +38,7 @@ gulp.task('scripts:main', () => {
 });
 
 gulp.task('scripts:restaurant', () => {
-	browserify(['js/restaurant_info.js', 'js/dbhelper.js'])
+	browserify(['./sw.js', 'js/restaurant_info.js', 'js/dbhelper.js'])
 		.transform(
 			babelify.configure({
 				presets: ['env']

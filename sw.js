@@ -1,12 +1,14 @@
-let staticCacheName = 'restaurants-static-v3';
-let urlsToCache = [
+const staticCacheName = 'mws-final-v1';
+const RUNTIME = 'runtime';
+
+const urlsToCache = [
 	'./',
 	'index.html',
 	'restaurant.html',
 	'css/styles.css',
 	'dist/main.js',
-	'dist/restaurant.js',
-	'images/img/favicon.ico',
+	'dist/restaurant_info.js',
+	'favicon.ico',
 	'images/img/icon-512.png',
 	'images/img/icon-256.png',
 	'images/img/icon.png',
@@ -42,30 +44,44 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
+	const currentCaches = [staticCacheName, RUNTIME];
 	event.waitUntil(
-		caches.keys().then(cacheNames =>
-			Promise.all(
-				cacheNames
-					.filter(
-						cacheName =>
-							cacheName.startsWith('restaurants-') &&
-							cacheName !== staticCacheName
-					)
-					.map(cacheName => {
-						console.log(
-							`⚙️ ServiceWorker Deleting the cached files from ${cacheName} `
-						);
-						return caches.delete(cacheName);
+		caches
+			.keys()
+			.then(cacheNames => {
+				return cacheNames.filter(
+					cacheName => !currentCaches.includes(cacheName)
+				);
+			})
+			.then(cachesToDelete => {
+				return Promise.all(
+					cachesToDelete.map(cacheToDelete => {
+						return caches.delete(cacheToDelete);
 					})
-			)
-		)
+				);
+			})
+			.then(() => self.clients.claim())
 	);
 });
 
 self.addEventListener('fetch', event => {
-	event.respondWith(
-		caches.match(event.request).then(response => {
-			return response || fetch(event.request);
-		})
-	);
+	const storageUrl = event.request.url.split(/[?#]/)[0];
+
+	if (storageUrl.startsWith(self.location.origin)) {
+		event.respondWith(
+			caches.match(storageUrl).then(cachedResponse => {
+				if (cachedResponse) {
+					return cachedResponse;
+				}
+
+				return caches.open(RUNTIME).then(cache => {
+					return fetch(event.request).then(response => {
+						return cache.put(storageUrl, response.clone()).then(() => {
+							return response;
+						});
+					});
+				});
+			})
+		);
+	}
 });
